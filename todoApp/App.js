@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Task from "./components/Task";
 
 export default function App() {
@@ -10,16 +10,19 @@ export default function App() {
         <View style={styles.items}>
           <Task text={'Text task 1'}></Task>
           <Task text={'Text task 2'}></Task>
-          <Task></Task>
-          <Task></Task>
-          <Task></Task>
-          <Task></Task>
-          <Task></Task>
         </View>
       </View>
-
-
       <StatusBar style="auto" />
+      <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.writeTaskWrapper}>
+        <TextInput style={styles.input} placeholder={'Write a task'}></TextInput>
+        <TouchableOpacity>
+          <View style={styles.addWrapper}>
+            <Text style={styles.addText}>+</Text>
+          </View>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </View>
   );
 }
